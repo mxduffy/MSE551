@@ -1,0 +1,78 @@
+LAMMPS (17 Nov 2016)
+Lattice spacing in x,y,z = 2.82843 2.82843 2.82843
+Created orthogonal box = (0 0 0) to (2.82843 2.82843 2.82843)
+  2 by 2 by 7 MPI processor grid
+Lattice spacing in x,y,z = 4 4 4
+Created 1 atoms
+Replicating atoms ...
+  orthogonal box = (0 0 0) to (2.82843 2.82843 2.82843)
+  2 by 2 by 7 MPI processor grid
+  1 atoms
+Reading potential file AlCu.eam.alloy with DATE: 2008-10-01
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 8.6825
+  ghost atom cutoff = 8.6825
+  binsize = 4.34125, bins = 1 1 1
+WARNING: Proc sub-domain size < neighbor skin, could lead to lost atoms (../domain.cpp:936)
+Setting up cg style minimization ...
+  Unit style    : metal
+Memory usage per processor = 4.11397 Mbytes
+Step PotEng Lx Ly Lz Press Pxx Pyy Pzz c_eatoms 
+       0   -2.9860896    2.8284271    2.8284271    2.8284271   -77337.374   -77337.374   -77337.374   -77337.374   -2.9860896 
+      10   -3.0155414    2.8001429    2.8001429    2.8001429   -59785.127   -59785.127   -59785.127   -59785.127   -3.0155414 
+      20   -3.0349377    2.7718586    2.7718586    2.7718586   -40202.194   -40202.194   -40202.194   -40202.194   -3.0349377 
+      30   -3.0490845    2.7435743    2.7435743    2.7435743   -29576.477   -29576.477   -29576.477   -29576.477   -3.0490845 
+      40   -3.0593346      2.71529      2.71529      2.71529   -16575.842   -16575.842   -16575.842   -16575.842   -3.0593346 
+      50   -3.0626545    2.6870536    2.6870536    2.6870536  -0.24423818  -0.24423818  -0.24423818  -0.24423818   -3.0626545 
+      53   -3.0626545    2.6870532    2.6870532    2.6870532 1.0972489e-10 1.0405734e-10 1.1273326e-10 1.1238407e-10   -3.0626545 
+Loop time of 6.56635 on 28 procs for 53 steps with 1 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = quadratic factors are zero
+  Energy initial, next-to-last, final = 
+        -2.98608963459     -3.06265447774     -3.06265447774
+  Force two-norm initial, final = 3.27669 4.19627e-15
+  Force max component initial, final = 3.27669 4.19579e-15
+  Final line search alpha, max atom move = 1 4.19579e-15
+  Iterations, force evaluations = 53 57
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.53677    | 0.65515    | 0.77434    |  10.4 |  9.98
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.013883   | 0.19799    | 0.7828     |  47.4 |  3.02
+Output  | 0.37814    | 0.38923    | 0.40014    |   0.5 |  5.93
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 5.324      |            |       | 81.08
+
+Nlocal:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+Nghost:    307.964 ave 343 max 294 min
+Histogram: 20 0 0 0 0 0 0 0 0 8
+Neighs:    2.17857 ave 61 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 61
+Ave neighs/atom = 61
+Neighbor list builds = 0
+Dangerous builds = 0
+System init for write_data ...
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 8.6825
+  ghost atom cutoff = 8.6825
+  binsize = 4.34125, bins = 1 1 1
+WARNING: Proc sub-domain size < neighbor skin, could lead to lost atoms (../domain.cpp:936)
+Number of atoms = 1;
+Lattice constant (Angstoms) = 2.68705318650982;
+All done!
+Total wall time: 0:00:07

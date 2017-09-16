@@ -1,0 +1,142 @@
+LAMMPS (17 Nov 2016)
+# Find minimum energy fcc configuration
+# Mark Tschopp, 2010
+# Modified by Abduljabar Alsayoud
+
+# ---------- Initialize Simulation ---------------------
+clear
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+
+# ---------- Variables ---------------------
+variable lat equal (4*(sqrt(6))/3)
+
+
+# ---------- Create Atoms ---------------------
+#lattice has to be specified first -> all geometry commands are based on it
+lattice 	bcc ${lat}
+lattice 	bcc 3.2659863237109
+Lattice spacing in x,y,z = 3.26599 3.26599 3.26599
+#region ID style args keyword (0 1 means 0 lat) (specifies the simulation cell)
+region	box block 0 1 0 1 0 1 units lattice
+#create_box N region-ID (N=# of atom types)
+create_box	1 box
+Created orthogonal box = (0 0 0) to (3.26599 3.26599 3.26599)
+  2 by 2 by 7 MPI processor grid
+
+lattice	bcc 4 orient x 1 0 0 orient y 0 1 0 orient z 0 0 1
+Lattice spacing in x,y,z = 4 4 4
+#create_atoms type style
+create_atoms 1 box
+Created 2 atoms
+replicate 1 1 1
+  orthogonal box = (0 0 0) to (3.26599 3.26599 3.26599)
+  2 by 2 by 7 MPI processor grid
+  2 atoms
+
+# ---------- Define Interatomic Potential ---------------------
+pair_style eam/alloy
+pair_coeff * * AlCu.eam.alloy Al
+Reading potential file AlCu.eam.alloy with DATE: 2008-10-01
+neighbor 2.0 bin
+neigh_modify delay 10 check yes
+
+# ---------- Define Settings ---------------------
+#compute ID group-ID style
+#potentail energy per atom
+compute poteng all pe/atom
+#the sum of all poteng
+compute eatoms all reduce sum c_poteng
+
+
+# ---------- Run Minimization ---------------------
+#So timestep start at 0
+reset_timestep 0
+fix 1 all box/relax iso 0.0 vmax 0.001
+thermo 10
+thermo_style custom step pe lx ly lz press pxx pyy pzz c_eatoms
+min_style cg
+minimize 1e-25 1e-25 5000 10000
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 8.6825
+  ghost atom cutoff = 8.6825
+  binsize = 4.34125 -> bins = 1 1 1
+WARNING: Proc sub-domain size < neighbor skin, could lead to lost atoms (../domain.cpp:936)
+Memory usage per processor = 4.07448 Mbytes
+Step PotEng Lx Ly Lz Press Pxx Pyy Pzz c_eatoms 
+       0   -5.7823093    3.2659863    3.2659863    3.2659863       102940       102940       102940       102940   -5.7823093 
+      10   -5.8790106    3.2986462    3.2986462    3.2986462    71899.532    71899.532    71899.532    71899.532   -5.8790106 
+      20   -5.9602762    3.3313061    3.3313061    3.3313061    43314.462    43314.462    43314.462    43314.462   -5.9602762 
+      30   -6.0373458    3.3639659    3.3639659    3.3639659    15971.775    15971.775    15971.775    15971.775   -6.0373458 
+      40   -6.1818468    3.3639659    3.3639659    3.3639659   -8243.9973   -8243.9973   -8243.9973   -8243.9973   -6.1818468 
+      50   -6.2724327    3.3313061    3.3313061    3.3313061   -6860.5573   -6860.5573   -6860.5573   -6860.5573   -6.2724327 
+      60   -6.3621693    3.2986462    3.2986462    3.2986462    -4975.326    -4975.326    -4975.326    -4975.326   -6.3621693 
+      70   -6.4567453    3.2659863    3.2659863    3.2659863    -2892.783    -2892.783    -2892.783    -2892.783   -6.4567453 
+      80   -6.5573114    3.2333265    3.2333265    3.2333265   -828.39102   -828.39102   -828.39102   -828.39102   -6.5573114 
+      90   -6.6032368     3.219112     3.219112     3.219112 -3.3830051e-05 -3.3830046e-05 -3.3830046e-05 -3.3830059e-05   -6.6032368 
+      91   -6.6032368     3.219112     3.219112     3.219112 9.5034778e-05 9.5034772e-05 9.5034772e-05 9.503479e-05   -6.6032368 
+Loop time of 13.5972 on 28 procs for 91 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+        -5.78230928822     -6.60323678084     -6.60323678084
+  Force two-norm initial, final = 8.43944 6.85959e-09
+  Force max component initial, final = 6.71488 6.02254e-09
+  Final line search alpha, max atom move = 1 6.02254e-09
+  Iterations, force evaluations = 91 98
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 2.173      | 2.206      | 2.2208     |   1.3 | 16.22
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.17188    | 0.6532     | 2.3437     |  82.7 |  4.80
+Output  | 0.61339    | 0.71941    | 0.78707    |   4.9 |  5.29
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 10.02      |            |       | 73.68
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    390.786 ave 396 max 360 min
+Histogram: 4 0 0 0 0 0 0 0 0 24
+Neighs:    5.42857 ave 93 max 0 min
+Histogram: 26 0 0 0 0 0 1 0 0 1
+
+Total # of neighbors = 152
+Ave neighs/atom = 76
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data optimized.data
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 8.6825
+  ghost atom cutoff = 8.6825
+  binsize = 4.34125 -> bins = 1 1 1
+WARNING: Proc sub-domain size < neighbor skin, could lead to lost atoms (../domain.cpp:936)
+
+variable natoms equal "count(all)"
+###variable teng equal "c_eatoms"
+variable length equal "lx"
+#variable ecoh equal "v_teng/v_natoms"
+
+###print "Total energy (eV) = ${teng};"
+print "Number of atoms = ${natoms};"
+Number of atoms = 2;
+print "Lattice constant (Angstoms) = ${length};"
+Lattice constant (Angstoms) = 3.21911196315487;
+#print "Cohesive energy (eV) = ${ecoh};"
+
+print "All done!" 
+All done!
+Total wall time: 0:00:15

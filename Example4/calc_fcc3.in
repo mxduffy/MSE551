@@ -1,0 +1,55 @@
+# Find minimum energy fcc configuration
+# Mark Tschopp, 2010
+# Modified by Abduljabar Alsayoud
+
+# ---------- Initialize Simulation --------------------- 
+clear 
+units metal 
+dimension 3 
+boundary p p p 
+atom_style atomic 
+
+
+# ---------- Read Data --------------------- 
+# Read config files (start with the minimized structure from the previous ex)
+read_data Al_mp-134.data
+
+# ---------- Define Interatomic Potential --------------------- 
+pair_style eam/alloy 
+pair_coeff * * AlCu.eam.alloy Al
+neighbor 2.0 bin 
+neigh_modify delay 10 check yes 
+ 
+# ---------- Define Settings --------------------- 
+compute poteng all pe/atom
+compute eatoms all reduce sum c_poteng 
+
+
+# ---------- Run Minimization --------------------- 
+reset_timestep 0 
+# each time step is 0.005 picoseconds(5 femtoseconds)
+timestep 0.005
+
+#velocity group-ID style args  (set the temperature)
+velocity all create 300 1236
+
+#Fixes 
+fix 1 all npt temp 300 300 0.5 iso 0 0 5
+
+#global output on the screen
+thermo 100 
+thermo_style custom step pe lx ly lz press pxx pyy pzz c_eatoms 
+
+
+#dump ID group-ID style N file args  (ITEM: ATOMS id type xs ys zs)  (dump per atom properties)
+dump 2 all atom 50 dump.Al_npt
+
+
+#Run for 10 picoseconds
+run 2000
+unfix 1
+undump 2
+
+
+
+print "All done!" 
