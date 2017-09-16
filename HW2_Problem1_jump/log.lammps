@@ -1,0 +1,5005 @@
+LAMMPS (17 Nov 2016)
+# minimal LAMMPS input file: change potential
+
+units lj
+atom_style atomic
+boundary p p p
+
+lattice sc 1.0
+Lattice spacing in x,y,z = 1 1 1
+
+# create simulation cell
+region r1 block -5.0 5.0 -5.0 5.0 -5.0 5.0
+create_box 1 r1
+Created orthogonal box = (-5 -5 -5) to (5 5 5)
+  7 by 2 by 2 MPI processor grid
+
+# required must come after box is created
+mass 1 1.0
+
+variable d loop 60
+
+label loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+1/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  0.55 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0     2537.971            0     2537.971    20.592779 
+Loop time of 0.0522812 on 28 procs for 0 steps with 2 atoms
+
+94.8% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+         2537.97099564                  0      2537.97099564
+  Force two-norm initial, final = 158850 158850
+  Force max component initial, final = 112324 112324
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.05228    |            |       |100.00
+
+Nlocal:    0.0714286 ave 2 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+Nghost:    9.64286 ave 16 max 6 min
+Histogram: 1 0 19 0 0 0 4 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.1
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+2/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  0.6 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0    875.92037            0    875.92037    7.1788308 
+Loop time of 0.0196835 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+          875.92037498                  0       875.92037498
+  Force two-norm initial, final = 50762 50762
+  Force max component initial, final = 35894.2 35894.2
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.01968    |            |       |100.00
+
+Nlocal:    0.0714286 ave 2 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+Nghost:    9.64286 ave 16 max 6 min
+Histogram: 1 0 19 0 0 0 4 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.2
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+3/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  0.65 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0    325.09832            0    325.09832    2.7068608 
+Loop time of 0.0380796 on 28 procs for 0 steps with 2 atoms
+
+98.9% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+         325.098324956                  0      325.098324956
+  Force two-norm initial, final = 17668.1 17668.1
+  Force max component initial, final = 12493.2 12493.2
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03808    |            |       |100.00
+
+Nlocal:    0.0714286 ave 2 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+Nghost:    9.64286 ave 16 max 6 min
+Histogram: 1 0 19 0 0 0 4 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.3
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+4/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  0.7 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0    127.49551            0    127.49551     1.087963 
+Loop time of 0.0254984 on 28 procs for 0 steps with 2 atoms
+
+98.0% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+         127.495512113                  0      127.495512113
+  Force two-norm initial, final = 6594.05 6594.05
+  Force max component initial, final = 4662.7 4662.7
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.0255     |            |       |100.00
+
+Nlocal:    0.0714286 ave 2 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+Nghost:    9.64286 ave 16 max 6 min
+Histogram: 1 0 19 0 0 0 4 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.4
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+5/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  0.75 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0    51.901272            0    51.901272   0.46015942 
+Loop time of 0.0228798 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+         51.9012722014                  0      51.9012722014
+  Force two-norm initial, final = 2603.05 2603.05
+  Force max component initial, final = 1840.64 1840.64
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02288    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 16 max 7 min
+Histogram: 2 18 0 0 0 4 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.5
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+6/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  0.8 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0    21.474436            0    21.474436   0.20231307 
+Loop time of 0.0240914 on 28 procs for 0 steps with 2 atoms
+
+96.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+         21.4744359255                  0      21.4744359255
+  Force two-norm initial, final = 1072.93 1072.93
+  Force max component initial, final = 758.674 758.674
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02409    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 16 max 7 min
+Histogram: 2 18 0 0 0 4 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.6
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+7/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  0.85 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0     8.757632            0     8.757632  0.091272803 
+Loop time of 0.0377842 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+         8.75763203317                  0      8.75763203317
+  Force two-norm initial, final = 455.574 455.574
+  Force max component initial, final = 322.139 322.139
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03778    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 16 max 7 min
+Histogram: 2 18 0 0 0 4 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.7
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+8/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  0.9 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0    3.3180595            0    3.3180595  0.041597887 
+Loop time of 0.0223599 on 28 procs for 0 steps with 2 atoms
+
+94.7% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+         3.31805947663                  0      3.31805947663
+  Force two-norm initial, final = 196.094 196.094
+  Force max component initial, final = 138.66 138.66
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02236    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 16 max 7 min
+Histogram: 2 18 0 0 0 4 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.8
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+9/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  0.95 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0   0.98048733            0   0.98048733  0.018726892 
+Loop time of 0.0177935 on 28 procs for 0 steps with 2 atoms
+
+95.1% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        0.980487328444                  0     0.980487328444
+  Force two-norm initial, final = 83.6331 83.6331
+  Force max component initial, final = 59.1376 59.1376
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.01779    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 16 max 7 min
+Histogram: 2 18 0 0 0 4 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.9
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+10/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0            0            0            0        0.008 
+Loop time of 0.028001 on 28 procs for 0 steps with 2 atoms
+
+95.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+                     0                  0                  0
+  Force two-norm initial, final = 33.9411 33.9411
+  Force max component initial, final = 24 24
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.028      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 16 max 7 min
+Histogram: 2 18 0 0 0 4 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.10
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+11/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.05 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.37875596            0  -0.37875596 0.0029396755 
+Loop time of 0.0259095 on 28 procs for 0 steps with 2 atoms
+
+95.8% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.378755956918                  0    -0.378755956918
+  Force two-norm initial, final = 11.8781 11.8781
+  Force max component initial, final = 8.39907 8.39907
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02591    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 16 max 7 min
+Histogram: 2 18 0 0 0 4 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.11
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+12/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.1 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.49168622            0  -0.49168622 0.00058230164 
+Loop time of 0.0237518 on 28 procs for 0 steps with 2 atoms
+
+96.1% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.491686224687                  0    -0.491686224687
+  Force two-norm initial, final = 2.24591 2.24591
+  Force max component initial, final = 1.5881 1.5881
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02375    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 16 max 7 min
+Histogram: 2 18 0 0 0 4 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.12
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+13/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.15 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.49084089            0  -0.49084089 -0.00046810636 
+Loop time of 0.02691 on 28 procs for 0 steps with 2 atoms
+
+97.1% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -0.49084089145                  0     -0.49084089145
+  Force two-norm initial, final = 1.72696 1.72696
+  Force max component initial, final = 1.22115 1.22115
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02691    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.13
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+14/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.2 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.44548264            0  -0.44548264 -0.00088467734 
+Loop time of 0.0219936 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.445482643792                  0    -0.445482643792
+  Force two-norm initial, final = 3.12781 3.12781
+  Force max component initial, final = 2.21169 2.21169
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02199    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.14
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+15/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.25 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.38684905            0  -0.38684905 -0.00099764037 
+Loop time of 0.0311267 on 28 procs for 0 steps with 2 atoms
+
+97.2% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.386849046528                  0    -0.386849046528
+  Force two-norm initial, final = 3.3861 3.3861
+  Force max component initial, final = 2.39434 2.39434
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03113    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.15
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+16/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.3 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.32850846            0  -0.32850846 -0.00097065797 
+Loop time of 0.0219992 on 28 procs for 0 steps with 2 atoms
+
+95.8% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -0.32850845723                  0     -0.32850845723
+  Force two-norm initial, final = 3.16781 3.16781
+  Force max component initial, final = 2.23998 2.23998
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.16
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+17/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.35 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.27581147            0  -0.27581147 -0.0008849303 
+Loop time of 0.0219984 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.275811473942                  0    -0.275811473942
+  Force two-norm initial, final = 2.78107 2.78107
+  Force max component initial, final = 1.96651 1.96651
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.17
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+18/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.4 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.23034346            0  -0.23034346 -0.00078026522 
+Loop time of 0.0219986 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.230343461103                  0    -0.230343461103
+  Force two-norm initial, final = 2.36456 2.36456
+  Force max component initial, final = 1.672 1.672
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.18
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+19/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.45 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.19203659            0  -0.19203659 -0.00067553294 
+Loop time of 0.0219946 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -0.19203659178                  0     -0.19203659178
+  Force two-norm initial, final = 1.97658 1.97658
+  Force max component initial, final = 1.39765 1.39765
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02199    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.19
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+20/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.5 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0   -0.1601683            0   -0.1601683 -0.00057901442 
+Loop time of 0.0322091 on 28 procs for 0 steps with 2 atoms
+
+97.6% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.160168297139                  0    -0.160168297139
+  Force two-norm initial, final = 1.6377 1.6377
+  Force max component initial, final = 1.15803 1.15803
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.20
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+21/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.55 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.13382436            0  -0.13382436 -0.0004936959 
+Loop time of 0.0322142 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.133824364103                  0    -0.133824364103
+  Force two-norm initial, final = 1.35134 1.35134
+  Force max component initial, final = 0.95554 0.95554
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.21
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+22/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.6 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.11210386            0  -0.11210386 -0.00041999374 
+Loop time of 0.032214 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.112103862193                  0    -0.112103862193
+  Force two-norm initial, final = 1.11368 1.11368
+  Force max component initial, final = 0.787488 0.787488
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.22
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+23/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.65 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.094200424            0 -0.094200424 -0.00035715531 
+Loop time of 0.0322138 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0942004243227                  0   -0.0942004243227
+  Force two-norm initial, final = 0.918353 0.918353
+  Force max component initial, final = 0.649373 0.649373
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.23
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+24/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.7 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.07942563            0  -0.07942563 -0.00030397149 
+Loop time of 0.0322133 on 28 procs for 0 steps with 2 atoms
+
+97.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0794256295812                  0   -0.0794256295812
+  Force two-norm initial, final = 0.758613 0.758613
+  Force max component initial, final = 0.53642 0.53642
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 16 max 7 min
+Histogram: 2 14 0 0 0 8 0 0 0 4
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.24
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+25/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.75 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.067206623            0 -0.067206623 -0.00025912958 
+Loop time of 0.0370359 on 28 procs for 0 steps with 2 atoms
+
+97.6% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0672066233791                  0   -0.0672066233791
+  Force two-norm initial, final = 0.628225 0.628225
+  Force max component initial, final = 0.444222 0.444222
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03704    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.25
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+26/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.8 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.057073528            0 -0.057073528 -0.00022137867 
+Loop time of 0.0322141 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0570735277933                  0   -0.0570735277933
+  Force two-norm initial, final = 0.521795 0.521795
+  Force max component initial, final = 0.368964 0.368964
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.26
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+27/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.85 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.048643979            0 -0.048643979 -0.00018959821 
+Loop time of 0.0322137 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0486439791856                  0   -0.0486439791856
+  Force two-norm initial, final = 0.434809 0.434809
+  Force max component initial, final = 0.307457 0.307457
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.27
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+28/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.9 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0  -0.04160807            0  -0.04160807 -0.00016281779 
+Loop time of 0.0321971 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0416080699618                  0   -0.0416080699618
+  Force two-norm initial, final = 0.363567 0.363567
+  Force max component initial, final = 0.257081 0.257081
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.0322     |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.28
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+29/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  1.95 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.035714989            0 -0.035714989 -0.00014021344 
+Loop time of 0.0322137 on 28 procs for 0 steps with 2 atoms
+
+97.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0357149894794                  0   -0.0357149894794
+  Force two-norm initial, final = 0.305064 0.305064
+  Force max component initial, final = 0.215713 0.215713
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.29
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+30/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.030761719            0 -0.030761719 -0.00012109375 
+Loop time of 0.0322137 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -0.03076171875                  0     -0.03076171875
+  Force two-norm initial, final = 0.256879 0.256879
+  Force max component initial, final = 0.181641 0.181641
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.30
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+31/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.05 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.026583713            0 -0.026583713 -0.00010488259 
+Loop time of 0.032215 on 28 procs for 0 steps with 2 atoms
+
+97.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0265837126643                  0   -0.0265837126643
+  Force two-norm initial, final = 0.217063 0.217063
+  Force max component initial, final = 0.153487 0.153487
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.31
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+32/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.1 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.023047338            0 -0.023047338 -9.1101778e-05 
+Loop time of 0.022 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0230473378743                  0   -0.0230473378743
+  Force two-norm initial, final = 0.184053 0.184053
+  Force max component initial, final = 0.130145 0.130145
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.32
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+33/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.15 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.020043791            0 -0.020043791 -7.9355135e-05 
+Loop time of 0.0219799 on 28 procs for 0 steps with 2 atoms
+
+96.2% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0200437905529                  0   -0.0200437905529
+  Force two-norm initial, final = 0.156593 0.156593
+  Force max component initial, final = 0.110728 0.110728
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02198    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.33
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+34/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.2 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.017484229            0 -0.017484229 -6.931459e-05 
+Loop time of 0.021998 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0174842288602                  0   -0.0174842288602
+  Force two-norm initial, final = 0.133671 0.133671
+  Force max component initial, final = 0.0945199 0.0945199
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.34
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+35/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.25 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.015295887            0 -0.015295887 -6.0708322e-05 
+Loop time of 0.0219989 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0152958868744                  0   -0.0152958868744
+  Force two-norm initial, final = 0.114473 0.114473
+  Force max component initial, final = 0.0809444 0.0809444
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.35
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+36/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.3 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.013418974            0 -0.013418974 -5.3310843e-05 
+Loop time of 0.0219985 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0134189741153                  0   -0.0134189741153
+  Force two-norm initial, final = 0.0983386 0.0983386
+  Force max component initial, final = 0.0695359 0.0695359
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.36
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+37/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.35 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0   -0.0118042            0   -0.0118042 -4.6934785e-05 
+Loop time of 0.0219987 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0118042004923                  0   -0.0118042004923
+  Force two-norm initial, final = 0.0847351 0.0847351
+  Force max component initial, final = 0.0599167 0.0599167
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.37
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+38/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.4 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.010410798            0 -0.010410798 -4.1424135e-05 
+Loop time of 0.0219991 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      -0.0104107977797                  0   -0.0104107977797
+  Force two-norm initial, final = 0.0732282 0.0732282
+  Force max component initial, final = 0.0517802 0.0517802
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.38
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+39/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.45 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0092049349            0 -0.0092049349 -3.66487e-05 
+Loop time of 0.0219987 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00920493489378                  0  -0.00920493489378
+  Force two-norm initial, final = 0.0634642 0.0634642
+  Force max component initial, final = 0.044876 0.044876
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.39
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+40/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.5 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0081584456            0 -0.0081584456 -3.2499565e-05 
+Loop time of 0.0219989 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+       -0.008158445568                  0    -0.008158445568
+  Force two-norm initial, final = 0.0551536 0.0551536
+  Force max component initial, final = 0.0389995 0.0389995
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.40
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+41/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.55 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0072478041            0 -0.0072478041 -2.8885387e-05 
+Loop time of 0.0219984 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00724780412223                  0  -0.00724780412223
+  Force two-norm initial, final = 0.0480589 0.0480589
+  Force max component initial, final = 0.0339828 0.0339828
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.41
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+42/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.6 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0064532986            0 -0.0064532986 -2.5729362e-05 
+Loop time of 0.0219991 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00645329859555                  0  -0.00645329859555
+  Force two-norm initial, final = 0.0419848 0.0419848
+  Force max component initial, final = 0.0296877 0.0296877
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.42
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+43/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.65 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0057583612            0 -0.0057583612 -2.2966743e-05 
+Loop time of 0.0219986 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00575836122257                  0  -0.00575836122257
+  Force two-norm initial, final = 0.0367697 0.0367697
+  Force max component initial, final = 0.0260001 0.0260001
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.43
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+44/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.7 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0051490247            0 -0.0051490247 -2.0542799e-05 
+Loop time of 0.0219989 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00514902465682                  0  -0.00514902465682
+  Force two-norm initial, final = 0.0322799 0.0322799
+  Force max component initial, final = 0.0228253 0.0228253
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.44
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+45/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.75 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.004613479            0 -0.004613479 -1.841115e-05 
+Loop time of 0.0219978 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00461347895889                  0  -0.00461347895889
+  Force two-norm initial, final = 0.0284043 0.0284043
+  Force max component initial, final = 0.0200849 0.0200849
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.45
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+46/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.8 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0041417096            0 -0.0041417096 -1.6532388e-05 
+Loop time of 0.0219989 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00414170955773                  0  -0.00414170955773
+  Force two-norm initial, final = 0.0250504 0.0250504
+  Force max component initial, final = 0.0177133 0.0177133
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.46
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+47/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.85 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0037252005            0 -0.0037252005 -1.4872944e-05 
+Loop time of 0.0219989 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00372520047084                  0  -0.00372520047084
+  Force two-norm initial, final = 0.0221405 0.0221405
+  Force max component initial, final = 0.0156557 0.0156557
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.47
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+48/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.9 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0033566903            0 -0.0033566903 -1.340415e-05 
+Loop time of 0.0219987 on 28 procs for 0 steps with 2 atoms
+
+95.6% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00335669027518                  0  -0.00335669027518
+  Force two-norm initial, final = 0.01961 0.01961
+  Force max component initial, final = 0.0138664 0.0138664
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.48
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+49/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  2.95 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0030299708            0 -0.0030299708 -1.2101466e-05 
+Loop time of 0.0219979 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00302997084572                  0  -0.00302997084572
+  Force two-norm initial, final = 0.0174041 0.0174041
+  Force max component initial, final = 0.0123066 0.0123066
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.49
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+50/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0027397209            0 -0.0027397209 -1.094383e-05 
+Loop time of 0.0220002 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00273972087212                  0  -0.00273972087212
+  Force two-norm initial, final = 0.0154769 0.0154769
+  Force max component initial, final = 0.0109438 0.0109438
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.50
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+51/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.05 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0024813677            0 -0.0024813677 -9.9131259e-06 
+Loop time of 0.0220045 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00248136774101                  0  -0.00248136774101
+  Force two-norm initial, final = 0.0137895 0.0137895
+  Force max component initial, final = 0.00975062 0.00975062
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.51
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+52/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.1 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0022509726            0 -0.0022509726 -8.9937339e-06 
+Loop time of 0.0214954 on 28 procs for 0 steps with 2 atoms
+
+96.2% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00225097262241                  0  -0.00225097262241
+  Force two-norm initial, final = 0.0123088 0.0123088
+  Force max component initial, final = 0.00870361 0.00870361
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.0215     |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.52
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+53/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.15 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0020451346            0 -0.0020451346 -8.1721561e-06 
+Loop time of 0.0219989 on 28 procs for 0 steps with 2 atoms
+
+96.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00204513459342                  0  -0.00204513459342
+  Force two-norm initial, final = 0.0110068 0.0110068
+  Force max component initial, final = 0.00778301 0.00778301
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.022      |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    10.2143 ave 12 max 7 min
+Histogram: 2 0 10 0 0 0 0 0 0 16
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.53
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+54/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.2 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0018609104            0 -0.0018609104 -7.4367028e-06 
+Loop time of 0.0219764 on 28 procs for 0 steps with 2 atoms
+
+96.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00186091042575                  0  -0.00186091042575
+  Force two-norm initial, final = 0.00985977 0.00985977
+  Force max component initial, final = 0.00697191 0.00697191
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02198    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.54
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+55/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.25 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0016957473            0 -0.0016957473 -6.7772283e-06 
+Loop time of 0.0322129 on 28 procs for 0 steps with 2 atoms
+
+97.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00169574729804                  0  -0.00169574729804
+  Force two-norm initial, final = 0.00884718 0.00884718
+  Force max component initial, final = 0.0062559 0.0062559
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.55
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+56/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.3 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0015474262            0 -0.0015474262 -6.1849083e-06 
+Loop time of 0.0322141 on 28 procs for 0 steps with 2 atoms
+
+97.4% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00154742620231                  0  -0.00154742620231
+  Force two-norm initial, final = 0.00795162 0.00795162
+  Force max component initial, final = 0.00562264 0.00562264
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.56
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+57/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.35 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0014140142            0 -0.0014140142 -5.6520524e-06 
+Loop time of 0.0322141 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00141401422345                  0  -0.00141401422345
+  Force two-norm initial, final = 0.0071581 0.0071581
+  Force max component initial, final = 0.00506154 0.00506154
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.57
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+58/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.4 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0012938242            0 -0.0012938242 -5.1719445e-06 
+Loop time of 0.0322132 on 28 procs for 0 steps with 2 atoms
+
+97.3% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00129382420002                  0  -0.00129382420002
+  Force two-norm initial, final = 0.00645374 0.00645374
+  Force max component initial, final = 0.00456348 0.00456348
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.58
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+59/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.45 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0011853805            0 -0.0011853805 -4.7387086e-06 
+Loop time of 0.0272278 on 28 procs for 0 steps with 2 atoms
+
+97.7% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00118538054185                  0  -0.00118538054185
+  Force two-norm initial, final = 0.00582743 0.00582743
+  Force max component initial, final = 0.00412062 0.00412062
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02723    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.59
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+variable r equal (0.5+$d/20)
+variable r equal (0.5+60/20)
+# create two atoms,
+create_atoms 1 single 0 0.0 0.0
+Created 1 atoms
+create_atoms 1 single  $r 0.0 0.0
+create_atoms 1 single  3.5 0.0 0.0
+Created 1 atoms
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+WARNING: Resetting reneighboring criteria during minimization (../min.cpp:168)
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+Memory usage per processor = 3.52324 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0 -0.0010873902            0 -0.0010873902 -4.3471934e-06 
+Loop time of 0.0322148 on 28 procs for 0 steps with 2 atoms
+
+97.5% CPU use with 28 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+     -0.00108739019583                  0  -0.00108739019583
+  Force two-norm initial, final = 0.00526959 0.00526959
+  Force max component initial, final = 0.00372617 0.00372617
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03221    |            |       |100.00
+
+Nlocal:    0.0714286 ave 1 max 0 min
+Histogram: 26 0 0 0 0 0 0 0 0 2
+Nghost:    9.64286 ave 12 max 7 min
+Histogram: 2 0 14 0 0 0 0 0 0 12
+Neighs:    0.0357143 ave 1 max 0 min
+Histogram: 27 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 1
+Ave neighs/atom = 0.5
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data LJoptimized.data.$d
+write_data LJoptimized.data.60
+Neighbor list info ...
+  1 neighbor list requests
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.3
+  ghost atom cutoff = 5.3
+  binsize = 2.65 -> bins = 4 4 4
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+Deleted 2 atoms, new total = 0
+
+next d
+jump 2atoms.in loop
+
+
+Total wall time: 0:01:07

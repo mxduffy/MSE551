@@ -1,0 +1,45 @@
+# minimal LAMMPS input file: change potential
+
+units lj
+atom_style atomic
+boundary p p p
+
+lattice sc 1.0
+
+# create simulation cell
+region r1 block -5.0 5.0 -5.0 5.0 -5.0 5.0
+create_box 1 r1
+
+# required must come after box is created
+mass 1 1.0
+
+variable d loop 60
+
+label loop
+variable r equal (0.5+$d/20)
+# create two atoms, 
+create_atoms 1 single 0 0.0 0.0
+create_atoms 1 single  $r 0.0 0.0
+
+
+# set non-bonded potential
+pair_style lj/cut 5.0
+pair_coeff 1 1 1.0 1.0
+
+
+run_style verlet
+timestep  0.005   
+
+
+###convert minimize to zero so that it will just calculate the energy for the given distance, not minimize it
+minimize 0 0 0 0
+write_data LJoptimized.data.$d
+
+###thermo 10         # thermo output every 10 steps
+
+delete_atoms group all
+
+next d
+jump 2atoms.in loop
+
+
