@@ -1,0 +1,3 @@
+/pbs/ocelote/i7n19/mom_priv/jobs/845523.head1.cm.cluster.SC: line 26: setenv: command not found
+/pbs/ocelote/i7n19/mom_priv/jobs/845523.head1.cm.cluster.SC: line 27: setenv: command not found
+=>> PBS: job killed: walltime 3625 exceeded limit 3600
