@@ -1,0 +1,3 @@
+/pbs/ocelote/i14n0/mom_priv/jobs/863441.head1.cm.cluster.SC: line 26: setenv: command not found
+/pbs/ocelote/i14n0/mom_priv/jobs/863441.head1.cm.cluster.SC: line 27: setenv: command not found
+=>> PBS: job killed: cput 2046 exceeded limit 1680
