@@ -1,0 +1,464 @@
+a= 4.5
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 4.6
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 4.7
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 4.8
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 4.9
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.0
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.1
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.2
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.3
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.4
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.5
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.6
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.7
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.8
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 5.9
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+a= 6.0
+ running on    1 total cores
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.5 31Mar14 (build Feb  5 2015 19:39:53) complex                        
+  
+ POSCAR found type information on POSCAR  Si
+ POSCAR found :  1 types and       2 ions
+ scaLAPACK will be used
+ LDA part: xc-table for Ceperly-Alder, standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.427038850474E+01   -0.42704E+01   -0.20917E+03   928   0.424E+02
+DAV:   2    -0.120899455769E+02   -0.78196E+01   -0.73830E+01  1432   0.531E+01
+DAV:   3    -0.121617401286E+02   -0.71795E-01   -0.71795E-01  1184   0.610E+00
+DAV:   4    -0.121619255038E+02   -0.18538E-03   -0.18538E-03  1408   0.311E-01
+DAV:   5    -0.121619255897E+02   -0.85886E-07   -0.85826E-07  1176   0.607E-03    0.308E+00
+DAV:   6    -0.119747201849E+02    0.18721E+00   -0.12804E-01  1056   0.179E+00    0.178E+00
+DAV:   7    -0.118903137029E+02    0.84406E-01   -0.21458E-01  1072   0.236E+00    0.165E-01
+DAV:   8    -0.118904312093E+02   -0.11751E-03   -0.54803E-03   976   0.545E-01    0.293E-02
+DAV:   9    -0.118903929572E+02    0.38252E-04   -0.17355E-04  1208   0.819E-02
+   1 F= -.11890393E+02 E0= -.11890392E+02  d E =-.166097E-05
+ writing wavefunctions
+4.5 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+4.6 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+4.7 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+4.8 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+4.9 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.0 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.1 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.2 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.3 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.4 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.5 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.6 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.7 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.8 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+5.9 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
+6.0 1 F= -.11890393E+02 E0= -.11890392E+02 d E =-.166097E-05
