@@ -1,6 +1,6 @@
 System = Cu-As-Te
 ISTART = 0 ; ICHARG = 2
-ENCUT = 1000
+ENCUT = 300
 ISMEAR = 0; SIGMA = 0.1
 NSW = 5
 IBRION = 2
