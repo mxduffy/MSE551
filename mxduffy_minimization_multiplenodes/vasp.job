@@ -5,8 +5,8 @@
 #PBS -q standard
 #PBS -l jobtype=cluster_only
 #PBS -l select=3:ncpus=12:mem=23GB
-#PBS -l walltime=1:00:00
-#PBS -l cput=36:00:00
+#PBS -l walltime=100:00:00
+#PBS -l cput=3600:00:00
 
 ##Change directory to where your input file is located
 cd $PBS_O_WORKDIR
